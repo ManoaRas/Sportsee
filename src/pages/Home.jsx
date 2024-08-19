@@ -1,14 +1,17 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+
+import { SimpleBarChart } from '../components/SimpleBarChart'
+
 import {
   getUserInfos,
-  // getActivity,
+  getActivity,
   // getAverageSessions,
   // getPerformance
 } from '../services/api'
 
 export function Home() {
   const [userInfos, setUserInfos] = useState(null)
-  // const [activityInfos, setActivityInfos] = useState(null)
+  const [activityInfos, setActivityInfos] = useState(null)
   // const [averageSessionsInfos, setAverageSessionsInfos] = useState(null)
   // const [performanceInfos, setPerformanceInfos] = useState(null)
 
@@ -17,12 +20,12 @@ export function Home() {
   const fetchData = async () => {
     try {
       const userData = await getUserInfos(userId)
-      // const activityData = await getActivity(activityInfos)
-      // const averageSessionsData = await getAverageSessions(averageSessionsInfos)
-      // const performanceData = await getPerformance(performanceInfos)
+      const activityData = await getActivity(userId)
+      // const averageSessionsData = await getAverageSessions(userId)
+      // const performanceData = await getPerformance(userId)
 
       setUserInfos(userData)
-      // setActivityInfos(activityData)
+      setActivityInfos(activityData)
       // setAverageSessionsInfos(averageSessionsData)
       // setPerformanceInfos(performanceData)
     } catch (err) {
@@ -30,24 +33,35 @@ export function Home() {
     }
   }
 
-  useEffect(() => { fetchData() }, [])
+  useEffect(() => {
+    fetchData()
+  }, [])
 
   return (
     <section>
       {userInfos ? (
-        <>
-          <h1 className=''>
+        <div className='home'>
+          <h1 className='home--title'>
             Bonjour
-            <span className=''>{userInfos.data.userInfos.firstName}</span>
+            <span className='home--title__name'>
+              {userInfos.data.userInfos.firstName}
+            </span>
           </h1>
 
-          <p className=''>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
+          <p className='home--subtitle'>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
 
-          <div className=''>
+          <div className='home--infos'>
+            <article className='home--infos--left'>
+              {activityInfos && (
+                <SimpleBarChart activity={activityInfos} />
+              )}
+
+              {/* <div className='charts'></div> */}
+            </article>
+
+            {/* <article className='home--infos--right'></article> */}
           </div>
-
-          <div className=''></div>
-        </>
+        </div>
       ) : (
         <p>Loading...</p>
       )}
