@@ -16,7 +16,7 @@ export class SimpleRadarChart extends PureComponent {
       const performanceKind = perf.kind
       perf.kind = perfData.kind[performanceKind]
       return perf
-    });
+    })
 
     return (
       <ResponsiveContainer
@@ -45,6 +45,6 @@ export class SimpleRadarChart extends PureComponent {
           />
         </RadarChart>
       </ResponsiveContainer>
-    );
+    )
   }
 }

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 
+import { ScoreRadialBarChart } from '../components/ScoreRadialBarChart'
 import { SimpleBarChart } from '../components/SimpleBarChart'
-import { TinyLineChart } from '../components/TinyLineChart'
 import { SimpleRadarChart } from '../components/SimpleRadarChart'
+import { TinyLineChart } from '../components/TinyLineChart'
 
 import {
-  getUserInfos,
+  getUser,
   getActivity,
   getAverageSessions,
   getPerformance
@@ -21,7 +22,7 @@ export function Home() {
 
   const fetchData = async () => {
     try {
-      const userData = await getUserInfos(userId)
+      const userData = await getUser(userId)
       const activityData = await getActivity(userId)
       const averageSessionsData = await getAverageSessions(userId)
       const performanceData = await getPerformance(userId)
@@ -66,6 +67,8 @@ export function Home() {
                 {performanceInfos && (
                   <SimpleRadarChart performance={performanceInfos} />
                 )}
+
+                <ScoreRadialBarChart user={userInfos} />
               </div>
             </article>
 

@@ -7,7 +7,7 @@ import performance from '../mocks/performance.json'
 const BASE_URL = 'http://localhost:3000/user'
 const isMock = false
 
-export async function getUserInfos(id) {
+export async function getUser(id) {
   if (isMock === true) {
     return mainData
   } else {
