@@ -1,6 +1,6 @@
 import axios from 'axios'
 import activity from '../mocks/activity.json'
-// import averageSessions from '../mocks/averageSessions.json'
+import averageSessions from '../mocks/averageSessions.json'
 import mainData from '../mocks/mainData.json'
 // import performance from '../mocks/performance.json'
 
@@ -27,15 +27,15 @@ export async function getActivity(id) {
   }
 }
 
-// export async function getAverageSessions(id) {
-//   if (isMock === true) {
-//     return averageSessions
-//   } else {
-//     return await axios
-//       .get(`${BASE_URL}/${id}/average-sessions`)
-//       .then((resp) => resp.data)
-//   }
-// }
+export async function getAverageSessions(id) {
+  if (isMock === true) {
+    return averageSessions
+  } else {
+    return await axios
+      .get(`${BASE_URL}/${id}/average-sessions`)
+      .then((resp) => resp.data)
+  }
+}
 
 // export async function getPerformance(id) {
 //   if (isMock === true) {

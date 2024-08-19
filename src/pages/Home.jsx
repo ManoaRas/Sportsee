@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react'
 
 import { SimpleBarChart } from '../components/SimpleBarChart'
+import { TinyLineChart } from '../components/TinyLineChart'
 
 import {
   getUserInfos,
   getActivity,
-  // getAverageSessions,
+  getAverageSessions,
   // getPerformance
 } from '../services/api'
 
 export function Home() {
   const [userInfos, setUserInfos] = useState(null)
   const [activityInfos, setActivityInfos] = useState(null)
-  // const [averageSessionsInfos, setAverageSessionsInfos] = useState(null)
+  const [averageSessionsInfos, setAverageSessionsInfos] = useState(null)
   // const [performanceInfos, setPerformanceInfos] = useState(null)
 
   const userId = 12
@@ -21,12 +22,12 @@ export function Home() {
     try {
       const userData = await getUserInfos(userId)
       const activityData = await getActivity(userId)
-      // const averageSessionsData = await getAverageSessions(userId)
+      const averageSessionsData = await getAverageSessions(userId)
       // const performanceData = await getPerformance(userId)
 
       setUserInfos(userData)
       setActivityInfos(activityData)
-      // setAverageSessionsInfos(averageSessionsData)
+      setAverageSessionsInfos(averageSessionsData)
       // setPerformanceInfos(performanceData)
     } catch (err) {
       alert('Une erreur est survenue lors du chargement de données !')
@@ -56,7 +57,11 @@ export function Home() {
                 <SimpleBarChart activity={activityInfos} />
               )}
 
-              {/* <div className='charts'></div> */}
+              <div className='charts'>
+                {averageSessionsInfos && (
+                  <TinyLineChart averageSessions={averageSessionsInfos} />
+                )}
+              </div>
             </article>
 
             {/* <article className='home--infos--right'></article> */}
