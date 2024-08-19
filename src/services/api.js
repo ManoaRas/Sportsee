@@ -2,7 +2,7 @@ import axios from 'axios'
 import activity from '../mocks/activity.json'
 import averageSessions from '../mocks/averageSessions.json'
 import mainData from '../mocks/mainData.json'
-// import performance from '../mocks/performance.json'
+import performance from '../mocks/performance.json'
 
 const BASE_URL = 'http://localhost:3000/user'
 const isMock = false
@@ -37,12 +37,12 @@ export async function getAverageSessions(id) {
   }
 }
 
-// export async function getPerformance(id) {
-//   if (isMock === true) {
-//     return performance
-//   } else {
-//     return await axios
-//       .get(`${BASE_URL}/${id}/performance`)
-//       .then((resp) => resp.data)
-//   }
-// }
+export async function getPerformance(id) {
+  if (isMock === true) {
+    return performance
+  } else {
+    return await axios
+      .get(`${BASE_URL}/${id}/performance`)
+      .then((resp) => resp.data)
+  }
+}
