@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 // IMPORTATION ASSETS ICONS
 import apple from '../assets/icons/Carbohydrate.svg'
@@ -22,6 +23,9 @@ import {
 } from '../services/api'
 
 export function Home() {
+  const { userId } = useParams()
+  console.log(userId)
+
   const [data, setData] = useState({
     userInfos: null,
     activityInfos: null,
@@ -29,31 +33,29 @@ export function Home() {
     performanceInfos: null,
   })
 
-  const userId = 12
-
-  const fetchData = async () => {
-    try {
-      const [userData, activityData, averageSessionsData, performanceData] = await Promise.all([
-        getUser(userId),
-        getActivity(userId),
-        getAverageSessions(userId),
-        getPerformance(userId)
-      ])
-
-      setData({
-        userInfos: userData,
-        activityInfos: activityData,
-        averageSessionsInfos: averageSessionsData,
-        performanceInfos: performanceData
-      })
-    } catch (err) {
-      alert('Une erreur est survenue lors du chargement de données !')
-    }
-  }
-
   useEffect(() => {
+    async function fetchData() {
+      try {
+        const [userData, activityData, averageSessionsData, performanceData] = await Promise.all([
+          getUser(userId),
+          getActivity(userId),
+          getAverageSessions(userId),
+          getPerformance(userId)
+        ])
+
+        setData({
+          userInfos: userData,
+          activityInfos: activityData,
+          averageSessionsInfos: averageSessionsData,
+          performanceInfos: performanceData
+        })
+      } catch (err) {
+        alert('Une erreur est survenue lors du chargement de données !')
+      }
+    }
+
     fetchData()
-  }, [])
+  }, [userId])
 
   if (!data.userInfos) return <p>Loading...</p>
 

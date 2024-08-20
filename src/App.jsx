@@ -12,7 +12,7 @@ export function App() {
       <main>
         <VerticalMenu />
         <Routes>
-          <Route element={<Home />} path='/' />
+          <Route element={<Home />} path='/:userId' />
         </Routes>
       </main>
     </>

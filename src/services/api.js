@@ -7,42 +7,42 @@ import performance from '../mocks/performance.json'
 const BASE_URL = 'http://localhost:3000/user'
 const isMock = false
 
-export async function getUser(id) {
-  if (isMock === true) {
-    return mainData
+const mockData = {
+  getUser: mainData,
+  getActivity: activity,
+  getAverageSessions: averageSessions,
+  getPerformance: performance
+}
+
+const apiEndpoints = {
+  getUser: (id) => `${BASE_URL}/${id}`,
+  getActivity: (id) => `${BASE_URL}/${id}/activity`,
+  getAverageSessions: (id) => `${BASE_URL}/${id}/average-sessions`,
+  getPerformance: (id) => `${BASE_URL}/${id}/performance`,
+}
+
+async function fetchData(key, id) {
+  if (isMock) {
+    return mockData[key]
   } else {
-    return await axios
-      .get(`${BASE_URL}/${id}`)
-      .then((resp) => resp.data)
+    const url = apiEndpoints[key](id)
+    const resp = await axios.get(url)
+    return resp.data
   }
+}
+
+export async function getUser(id) {
+  return fetchData('getUser', id)
 }
 
 export async function getActivity(id) {
-  if (isMock === true) {
-    return activity
-  } else {
-    return await axios
-      .get(`${BASE_URL}/${id}/activity`)
-      .then((resp) => resp.data)
-  }
+  return fetchData('getActivity', id)
 }
 
 export async function getAverageSessions(id) {
-  if (isMock === true) {
-    return averageSessions
-  } else {
-    return await axios
-      .get(`${BASE_URL}/${id}/average-sessions`)
-      .then((resp) => resp.data)
-  }
+  return fetchData('getAverageSessions', id)
 }
 
 export async function getPerformance(id) {
-  if (isMock === true) {
-    return performance
-  } else {
-    return await axios
-      .get(`${BASE_URL}/${id}/performance`)
-      .then((resp) => resp.data)
-  }
+  return fetchData('getPerformance', id)
 }

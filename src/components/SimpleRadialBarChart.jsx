@@ -18,17 +18,17 @@ export class SimpleRadialBarChart extends PureComponent {
 
     const renderLegend = () => {
       return (
-        <div className='containerScore'>
-          <p className='resultScore'>{user.todayScore}</p>
+        <div className=''>
+          <p className=''>{user.todayScore}</p>
 
-          <span className='descriptionScore'>de votre <br /> objectif</span>
+          <span className=''>de votre <br /> objectif</span>
         </div>
       )
     }
 
     return (
       <div>
-        <h1 className='titleRadialBarChart'>Score</h1>
+        <h1 className=''>Score</h1>
 
         <ResponsiveContainer height='100%' width='100%'>
           <RadialBarChart

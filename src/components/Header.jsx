@@ -2,6 +2,13 @@ import { Link, NavLink } from "react-router-dom"
 
 import logo from '../assets/logo.svg'
 
+const navLinks = [
+  { label: 'Accueil' },
+  { label: 'Profil' },
+  { label: 'Réglages' },
+  { label: 'Communauté' }
+]
+
 export function Header() {
   return (
     <section>
@@ -10,18 +17,9 @@ export function Header() {
       </Link>
 
       <nav className=''>
-        <NavLink className='' to='/'>
-          Accueil
-        </NavLink>
-        <NavLink className='' to='/error'>
-          Profil
-        </NavLink>
-        <NavLink className='' to='/error'>
-          Réglage
-        </NavLink>
-        <NavLink className='' to='/error'>
-          Communauté
-        </NavLink>
+        {navLinks.map(({ label }) => (
+          <NavLink className='' to='/'>{label}</NavLink>
+        ))}
       </nav>
     </section>
   )

@@ -22,7 +22,7 @@ export class TinyLineChart extends PureComponent {
     })
 
     const renderLegend = () => {
-      return <p className='duration-of-sessions'>Durée moyenne des sessions</p>
+      return <p className=''>Durée moyenne des sessions</p>
     }
 
     return (
