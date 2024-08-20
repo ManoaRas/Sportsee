@@ -22,24 +22,30 @@ import {
 } from '../services/api'
 
 export function Home() {
-  const [userInfos, setUserInfos] = useState(null)
-  const [activityInfos, setActivityInfos] = useState(null)
-  const [averageSessionsInfos, setAverageSessionsInfos] = useState(null)
-  const [performanceInfos, setPerformanceInfos] = useState(null)
+  const [data, setData] = useState({
+    userInfos: null,
+    activityInfos: null,
+    averageSessionsInfos: null,
+    performanceInfos: null,
+  })
 
   const userId = 12
 
   const fetchData = async () => {
     try {
-      const userData = await getUser(userId)
-      const activityData = await getActivity(userId)
-      const averageSessionsData = await getAverageSessions(userId)
-      const performanceData = await getPerformance(userId)
+      const [userData, activityData, averageSessionsData, performanceData] = await Promise.all([
+        getUser(userId),
+        getActivity(userId),
+        getAverageSessions(userId),
+        getPerformance(userId)
+      ])
 
-      setUserInfos(userData)
-      setActivityInfos(activityData)
-      setAverageSessionsInfos(averageSessionsData)
-      setPerformanceInfos(performanceData)
+      setData({
+        userInfos: userData,
+        activityInfos: activityData,
+        averageSessionsInfos: averageSessionsData,
+        performanceInfos: performanceData
+      })
     } catch (err) {
       alert('Une erreur est survenue lors du chargement de données !')
     }
@@ -49,71 +55,55 @@ export function Home() {
     fetchData()
   }, [])
 
+  if (!data.userInfos) return <p>Loading...</p>
+
+  const { userInfos, activityInfos, averageSessionsInfos, performanceInfos } = data
+  const { firstName } = userInfos.data.userInfos
+  const { calorieCount, proteinCount, carbohydrateCount, lipidCount } = userInfos.data.keyData
+
+  const statsCards = [
+    { data: `${calorieCount}kCal`, icon: 'fire', img: fire, name: 'Calories' },
+    { data: `${proteinCount}g`, icon: 'chicken', img: chicken, name: 'Protéines' },
+    { data: `${carbohydrateCount}g`, icon: 'apple', img: apple, name: 'Glucides' },
+    { data: `${lipidCount}g`, icon: 'burger', img: burger, name: 'Lipides' },
+  ]
+
   return (
     <section>
-      {userInfos ? (
-        <div className='home'>
-          <h1 className='home--title'>
-            Bonjour
-            <span className='home--title__name'>
-              {userInfos.data.userInfos.firstName}
-            </span>
-          </h1>
+      <div className='home'>
+        <h1 className='home--title'>
+          Bonjour
+          <span className='home--title__name'>{firstName}</span>
+        </h1>
 
-          <p className='home--subtitle'>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
+        <p className='home--subtitle'>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
 
-          <div className='home--infos'>
-            <article className='home--infos--left'>
-              {activityInfos && (
-                <SimpleBarChart activity={activityInfos} />
-              )}
+        <div className='home--infos'>
+          <article className='home--infos--left'>
+            {activityInfos && (<SimpleBarChart activity={activityInfos} />)}
 
-              <div className='charts'>
-                {averageSessionsInfos && (
-                  <TinyLineChart averageSessions={averageSessionsInfos} />
-                )}
+            <div className='charts'>
+              {averageSessionsInfos && (<TinyLineChart averageSessions={averageSessionsInfos} />)}
 
-                {performanceInfos && (
-                  <SimpleRadarChart performance={performanceInfos} />
-                )}
+              {performanceInfos && (<SimpleRadarChart performance={performanceInfos} />)}
 
-                <ScoreRadialBarChart user={userInfos} />
-              </div>
-            </article>
+              <ScoreRadialBarChart user={userInfos} />
+            </div>
+          </article>
 
-            <article className='home--infos--right'>
-              <div key={userInfos.id}>
-                <StatsCard
-                  data={userInfos.data.keyData.calorieCount + 'kCal'}
-                  icon={'fire'}
-                  img={fire}
-                  name='Calories'
-                />
-                <StatsCard
-                  data={userInfos.data.keyData.proteinCount + 'g'}
-                  icon={'chicken'}
-                  img={chicken}
-                  name='Glucides'
-                />
-                <StatsCard
-                  data={userInfos.data.keyData.carbohydrateCount + 'g'}
-                  icon={'apple'}
-                  img={apple}
-                  name='Glucides'
-                />
-                <StatsCard
-                  data={userInfos.data.keyData.lipidCount + 'g'}
-                  icon={'burger'}
-                  img={burger}
-                  name='Glucides'
-                />
-              </div>
-            </article>
-          </div>
+          <article className='home--infos--right'>
+            {statsCards.map((card, index) => (
+              <StatsCard
+                key={index}
+                data={card.data}
+                icon={card.icon}
+                img={card.img}
+                name={card.name}
+              />
+            ))}
+          </article>
         </div>
-      ) : (
-        <p>Loading...</p>
-      )}
+      </div>
     </section>
   )
 }
