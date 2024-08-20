@@ -26,7 +26,7 @@ export class TinyLineChart extends PureComponent {
     }
 
     return (
-      <>
+      <div className='charts tiny-chart'>
         <ResponsiveContainer height='100%' width='100%'>
           <LineChart
             width={500}
@@ -41,14 +41,15 @@ export class TinyLineChart extends PureComponent {
               itemStyle={{ color: 'black' }}
             />
             <XAxis
-              axisLine={false}
               dataKey='day'
+              axisLine={false}
               tickLine={false}
               tick={{
                 stroke: '#FF5A5A',
                 fontWeight: '500',
                 opacity: '1.4',
-                fontSize: 10
+                fontSize: 10,
+                fill: 'white'
               }}
             />
             <Line
@@ -64,11 +65,12 @@ export class TinyLineChart extends PureComponent {
                 lineHeight: '24px',
                 opacity: '0.5'
               }}
+              dot={false}
             />
             <Legend content={renderLegend} verticalAlign='top' />
           </LineChart>
         </ResponsiveContainer>
-      </>
+      </div>
     )
   }
 }

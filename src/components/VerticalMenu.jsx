@@ -7,14 +7,17 @@ import yoga from '../assets/icons/Yoga.svg'
 
 export function VerticalMenu() {
   return (
-    <section className=''>
-      <div className=''>
+    <section className='vertical-menu'>
+      <div>
         <Icons alt='Logo Yoga' img={yoga}></Icons>
         <Icons alt='Logo Swimming' img={swimming}></Icons>
         <Icons alt='Logo Bike' img={bike}></Icons>
         <Icons alt='Logo Dumbbell' img={dumbbell}></Icons>
       </div>
-      <p className=''>Copyright SportSee 2023</p>
+
+      <div>
+        <p className='vertical-menu__cr'>Copyright SportSee 2024</p>
+      </div>
     </section>
   )
 }

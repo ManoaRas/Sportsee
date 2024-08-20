@@ -23,33 +23,40 @@ export class SimpleBarChart extends PureComponent {
       }
     })
 
+    const CustomTooltip = (data) => {
+      try {
+        let kg = data.payload[0]['value']
+        let kCal = data.payload[1]['value']
+
+        return (
+          <div className='bar-chart--tooltip'>
+            <p>{`${kg}kg`}</p>
+            <p>{`${kCal}kCal`}</p>
+          </div>
+        )
+      } catch (err) {
+        return null
+      }
+    }
+
     return (
-      <div className=''>
-        <p className=''>Activité quotidienne</p>
+      <div className='bar-chart'>
+        <p className='bar-chart__text'>Activité quotidienne</p>
 
         <ResponsiveContainer background-color='#E60000' height='100%' width='100%'>
-          <BarChart
-            width={10}
-            height={300}
-            data={items}
-            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-            barCategoryGap={40}
-            barGap={8}
-          >
-            <CartesianGrid strokeDasharray='4 2' vertical={false} />
+          <BarChart data={items} barCategoryGap={20} barGap={10}>
+            <CartesianGrid strokeDasharray='2 2' horizontal={false} vertical={false} />
 
-            <XAxis
-              dataKey='day'
-              tickLine={false}
-              padding={{ right: -25, left: -25 }}
-            />
+            <XAxis dataKey='day' axisLine={false} tickLine={false} />
 
             <YAxis orientation='right' axisLine={false} tickLine={false} />
 
             <Tooltip
+              offset={40}
+              content={CustomTooltip}
               formatter={(value, name) => [`${value} ${name}`]}
               labelFormatter={() => ``}
-              contentStyle={{ backgroundColor: '#E60000', border: '#E60000' }}
+              contentStyle={{  }}
               itemStyle={{ color: 'white' }}
             />
 

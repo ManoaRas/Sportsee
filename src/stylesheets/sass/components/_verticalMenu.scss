@@ -1,0 +1,13 @@
+.vertical-menu {
+  background: $bg-color;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  &__cr {
+    color: $text-white;
+    font-size: 12px;
+    transform: rotate(-90deg);
+    width: 140px;
+  }
+}

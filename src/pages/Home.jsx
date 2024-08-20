@@ -22,9 +22,11 @@ import {
   getPerformance
 } from '../services/api'
 
+import { convertToKCal } from '../services/modelisationData'
+
+
 export function Home() {
   const { userId } = useParams()
-  console.log(userId)
 
   const [data, setData] = useState({
     userInfos: null,
@@ -64,47 +66,44 @@ export function Home() {
   const { calorieCount, proteinCount, carbohydrateCount, lipidCount } = userInfos.data.keyData
 
   const statsCards = [
-    { data: `${calorieCount}kCal`, icon: 'fire', img: fire, name: 'Calories' },
+    { data: `${convertToKCal(calorieCount)}kCal`, icon: 'fire', img: fire, name: 'Calories' },
     { data: `${proteinCount}g`, icon: 'chicken', img: chicken, name: 'Protéines' },
     { data: `${carbohydrateCount}g`, icon: 'apple', img: apple, name: 'Glucides' },
     { data: `${lipidCount}g`, icon: 'burger', img: burger, name: 'Lipides' },
   ]
 
   return (
-    <section>
-      <div className='home'>
-        <h1 className='home--title'>
-          Bonjour
-          <span className='home--title__name'>{firstName}</span>
-        </h1>
+    <section className='home'>
+      <h1 className='home--title'>
+        Bonjour <span className='home--title__name'>{firstName}</span>
+      </h1>
 
-        <p className='home--subtitle'>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
+      <p className='home--subtitle'>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
 
-        <div className='home--infos'>
-          <article className='home--infos--left'>
-            {activityInfos && (<SimpleBarChart activity={activityInfos.data} />)}
+      <div className='home--infos'>
+        <article className='home--infos--left'>
+          {activityInfos && (<SimpleBarChart activity={activityInfos.data} />)}
 
-            <div className='charts'>
-              {averageSessionsInfos && (<TinyLineChart averageSessions={averageSessionsInfos.data} />)}
+          <div className='home--infos--left--charts'>
+            {averageSessionsInfos && (<TinyLineChart averageSessions={averageSessionsInfos.data} />)}
 
-              {performanceInfos && (<SimpleRadarChart performance={performanceInfos.data} />)}
+            {performanceInfos && (<SimpleRadarChart performance={performanceInfos.data} />)}
 
-              <SimpleRadialBarChart user={userInfos.data} />
-            </div>
-          </article>
+            <SimpleRadialBarChart user={userInfos.data} />
+          </div>
+        </article>
 
-          <article className='home--infos--right'>
-            {statsCards.map((card, index) => (
-              <StatsCard
-                key={index}
-                data={card.data}
-                icon={card.icon}
-                img={card.img}
-                name={card.name}
-              />
-            ))}
-          </article>
-        </div>
+        <article className='home--infos--right'>
+          {statsCards.map((card, index) => (
+            <StatsCard
+              key={index}
+              data={card.data}
+              icon={card.icon}
+              img={card.img}
+              name={card.name}
+            />
+          ))}
+        </article>
       </div>
     </section>
   )

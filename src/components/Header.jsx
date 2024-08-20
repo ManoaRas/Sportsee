@@ -2,25 +2,19 @@ import { Link, NavLink } from "react-router-dom"
 
 import logo from '../assets/logo.svg'
 
-const navLinks = [
-  { label: 'Accueil' },
-  { label: 'Profil' },
-  { label: 'Réglages' },
-  { label: 'Communauté' }
-]
-
 export function Header() {
   return (
-    <section>
+    <header className='header'>
       <Link to='/'>
         <img className='' alt='Logo SportSee' src={logo} />
       </Link>
 
-      <nav className=''>
-        {navLinks.map(({ label }) => (
-          <NavLink className='' to='/'>{label}</NavLink>
-        ))}
+      <nav className='header--nav'>
+        <NavLink className="header--nav__text" to='/12'>Accueil</NavLink>
+        <NavLink className='header--nav__text' to='/12'>Profil</NavLink>
+        <NavLink className='header--nav__text' to='/12'>Réglages</NavLink>
+        <NavLink className='header--nav__text' to='/12'>Communauté</NavLink>
       </nav>
-    </section>
+    </header>
   )
 }

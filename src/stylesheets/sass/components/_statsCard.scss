@@ -1,0 +1,19 @@
+.stats-card {
+  display: flex;
+  margin: 40px 0;
+  &--icon {
+    font-size: 20px;
+    margin: 22px;
+  }
+  &--desc {
+    width: 100%;
+    &__data {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    &__name {
+      color: $text-grey;
+      font-size: 14px;
+    }
+  }
+}

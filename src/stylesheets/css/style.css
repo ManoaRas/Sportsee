@@ -1,0 +1,153 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body, main {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+main {
+  display: flex;
+  flex-grow: 1;
+}
+
+.bar-chart {
+  height: 320px;
+  position: relative;
+}
+.bar-chart__text {
+  position: absolute;
+  margin: 0;
+  margin-top: 10px;
+}
+.bar-chart--tooltip {
+  background-color: #E60000;
+  border: #E60000;
+  color: #FFFFFF;
+  padding: 10px;
+}
+
+.charts {
+  height: 253px;
+  width: 258px;
+  border-radius: 6px;
+}
+
+.tiny-chart {
+  background-color: #FF0000;
+  color: #F9C3C3;
+  font-size: 15px;
+}
+
+.radar-chart {
+  background-color: #020203;
+}
+
+.radial-chart__score {
+  font-size: 26px;
+  margin-bottom: 0;
+}
+
+.header {
+  background: #020203;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+.header--nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.header--nav__text {
+  color: #FFFFFF;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.icon {
+  margin: 20px;
+  padding: 14px;
+  background: #FFFFFF;
+  border-radius: 6px;
+}
+
+.stats-card {
+  display: flex;
+  margin: 40px 0;
+}
+.stats-card--icon {
+  font-size: 20px;
+  margin: 22px;
+}
+.stats-card--desc {
+  width: 100%;
+}
+.stats-card--desc__data {
+  font-size: 20px;
+  font-weight: 700;
+}
+.stats-card--desc__name {
+  color: #74798C;
+  font-size: 14px;
+}
+
+.vertical-menu {
+  background: #020203;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.vertical-menu__cr {
+  color: #FFFFFF;
+  font-size: 12px;
+  transform: rotate(-90deg);
+  width: 140px;
+}
+
+.home {
+  width: 100%;
+  margin: 34px;
+}
+@media screen and (min-width: 1440px) {
+  .home {
+    margin: 68px 107px;
+  }
+}
+.home--title {
+  font-size: 48px;
+  margin: 0;
+}
+.home--title__name {
+  color: #FF0000;
+}
+.home--subtitle {
+  font-size: 18px;
+}
+.home--infos {
+  display: flex;
+  margin: 77px 0;
+}
+.home--infos--left {
+  width: 75%;
+}
+.home--infos--left--charts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.home--infos--right {
+  width: 25%;
+}
+
+/*# sourceMappingURL=style.css.map */

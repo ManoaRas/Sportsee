@@ -1,0 +1,35 @@
+.home {
+  width: 100%;
+  @media screen and (min-width: $lgb) {
+    margin: 68px 107px;
+  }
+  margin: 34px;
+  &--title {
+    font-size: 48px;
+    margin: 0;
+    &__name {
+      color: $secondary-color;
+    }
+  }
+
+  &--subtitle {
+    font-size: 18px;
+  }
+
+  &--infos {
+    display: flex;
+    margin: 77px 0;
+    &--left {
+      width: 75%;
+      &--charts {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+    }
+
+    &--right {
+      width: 25%;
+    }
+  }
+}

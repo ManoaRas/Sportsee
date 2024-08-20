@@ -1,0 +1,38 @@
+.bar-chart {
+  height: 320px;
+  position: relative;
+  &__text {
+    position: absolute;
+    margin: 0;
+    margin-top: 10px;
+  }
+  &--tooltip {
+    background-color: $primary-color;
+    border: $primary-color;
+    color: $text-white;
+    padding: 10px;
+  }
+}
+
+.charts {
+  height: 253px;
+  width: 258px;
+  border-radius: 6px;
+}
+
+.tiny-chart {
+  background-color: $secondary-color;
+  color: #F9C3C3;
+  font-size: 15px;
+}
+
+.radar-chart {
+  background-color: $bg-color;
+}
+
+.radial-chart {
+  &__score {
+    font-size: 26px;
+    margin-bottom: 0;
+  }
+}
