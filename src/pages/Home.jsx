@@ -7,9 +7,9 @@ import chicken from '../assets/icons/Protein.svg'
 import fire from '../assets/icons/Calorie.svg'
 
 // IMPORTATION COMPONENTS
-import { ScoreRadialBarChart } from '../components/ScoreRadialBarChart'
 import { SimpleBarChart } from '../components/SimpleBarChart'
 import { SimpleRadarChart } from '../components/SimpleRadarChart'
+import { SimpleRadialBarChart } from '../components/SimpleRadialBarChart'
 import { StatsCard } from '../components/StatsCard'
 import { TinyLineChart } from '../components/TinyLineChart'
 
@@ -80,14 +80,14 @@ export function Home() {
 
         <div className='home--infos'>
           <article className='home--infos--left'>
-            {activityInfos && (<SimpleBarChart activity={activityInfos} />)}
+            {activityInfos && (<SimpleBarChart activity={activityInfos.data} />)}
 
             <div className='charts'>
-              {averageSessionsInfos && (<TinyLineChart averageSessions={averageSessionsInfos} />)}
+              {averageSessionsInfos && (<TinyLineChart averageSessions={averageSessionsInfos.data} />)}
 
-              {performanceInfos && (<SimpleRadarChart performance={performanceInfos} />)}
+              {performanceInfos && (<SimpleRadarChart performance={performanceInfos.data} />)}
 
-              <ScoreRadialBarChart user={userInfos} />
+              <SimpleRadialBarChart user={userInfos.data} />
             </div>
           </article>
 

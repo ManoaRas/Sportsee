@@ -8,23 +8,24 @@ import {
   ResponsiveContainer
 } from 'recharts'
 
+import { translateToFR } from '../services/modelisationData'
+
 export class SimpleRadarChart extends PureComponent {
   render() {
-    const perfData = this.props.performance.data
+    const { performance } = this.props
+    const { data } = performance
 
-    const items = perfData.data.map((perf) => {
-      const performanceKind = perf.kind
-      perf.kind = perfData.kind[performanceKind]
-      return perf
+    const items = data.map((item) => {
+      const strObj = performance.kind[item.kind]
+      return {
+        ...item,
+        kind: translateToFR(strObj)
+      }
     })
+    items.reverse()
 
     return (
-      <ResponsiveContainer
-        width='100%'
-        height='100%'
-        stroke='#8884d8'
-        fill='#8884d8'
-      >
+      <ResponsiveContainer fill='#8884d8' stroke='#8884d8' height='100%' width='100%'>
         <RadarChart
           cx='50%'
           cy='50%'
@@ -34,10 +35,10 @@ export class SimpleRadarChart extends PureComponent {
           data={items}
           fill='#8884d8'
         >
-          <PolarGrid fillOpacity={0.7} strokeWidth={2} radialLines={false} />
-          <PolarAngleAxis dataKey='kind' stroke='white' tickLine={false} />
+          <PolarGrid strokeWidth={3} radialLines={false} />
+          <PolarAngleAxis dataKey='kind' tickLine={false} />
           <Radar
-            name='Mike'
+            name='Karl'
             dataKey='value'
             stroke='#E60000'
             fill='#E60000'

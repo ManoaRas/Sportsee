@@ -9,11 +9,16 @@ import {
   ResponsiveContainer
 } from 'recharts'
 
+import { convertToStrDay } from '../services/modelisationData'
+
 export class TinyLineChart extends PureComponent {
   render() {
     const { averageSessions } = this.props
-    const items = averageSessions.data.sessions.map((item) => {
-      return item
+    const items = averageSessions.sessions.map((item) => {
+      return {
+        ...item,
+        day: convertToStrDay(item.day)
+      }
     })
 
     const renderLegend = () => {
@@ -22,7 +27,7 @@ export class TinyLineChart extends PureComponent {
 
     return (
       <>
-        <ResponsiveContainer width='100%' height='100%'>
+        <ResponsiveContainer height='100%' width='100%'>
           <LineChart
             width={500}
             height={300}

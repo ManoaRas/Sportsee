@@ -11,16 +11,23 @@ import {
   ResponsiveContainer
 } from 'recharts';
 
+import { convertToNbrDay } from '../services/modelisationData'
+
 export class SimpleBarChart extends PureComponent {
   render() {
     const { activity } = this.props
-    const items = activity.data.sessions.map((item) => item)
+    const items = activity.sessions.map((item) => {
+      return {
+        ...item,
+        day: convertToNbrDay(item.day)
+      }
+    })
 
     return (
       <div className=''>
         <p className=''>Activité quotidienne</p>
 
-        <ResponsiveContainer background-color='#E60000' width='100%' height='100%'>
+        <ResponsiveContainer background-color='#E60000' height='100%' width='100%'>
           <BarChart
             width={10}
             height={300}
@@ -32,7 +39,7 @@ export class SimpleBarChart extends PureComponent {
             <CartesianGrid strokeDasharray='4 2' vertical={false} />
 
             <XAxis
-              dataKey={'day'}
+              dataKey='day'
               tickLine={false}
               padding={{ right: -25, left: -25 }}
             />
@@ -47,24 +54,24 @@ export class SimpleBarChart extends PureComponent {
             />
 
             <Legend
-              verticalAlign='top'
               align='right'
-              height={36}
               dataKey='calories'
+              height={36}
               iconType='circle'
+              verticalAlign='top'
             />
 
             <Bar
-              name='Poids(kg)'
               dataKey='kilogram'
               fill='#282D30'
+              name='Poids(kg)'
               radius={[50, 50, 0, 0]}
             />
 
             <Bar
-              name='Calories brûlées (kCal)'
               dataKey='calories'
               fill='#E60000'
+              name='Calories brûlées (kCal)'
               radius={[50, 50, 0, 0]}
             />
           </BarChart>
