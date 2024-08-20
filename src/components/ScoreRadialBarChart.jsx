@@ -6,8 +6,6 @@ export class ScoreRadialBarChart extends PureComponent {
   render() {
     const { user } = this.props
 
-    console.log(user)
-
     const data = [
       {
         id: 1,

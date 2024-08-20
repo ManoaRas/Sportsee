@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from 'react'
 
+// IMPORTATION ASSETS ICONS
+import apple from '../assets/icons/Carbohydrate.svg'
+import burger from '../assets/icons/Lipid.svg'
+import chicken from '../assets/icons/Protein.svg'
+import fire from '../assets/icons/Calorie.svg'
+
+// IMPORTATION COMPONENTS
 import { ScoreRadialBarChart } from '../components/ScoreRadialBarChart'
 import { SimpleBarChart } from '../components/SimpleBarChart'
 import { SimpleRadarChart } from '../components/SimpleRadarChart'
+import { StatsCard } from '../components/StatsCard'
 import { TinyLineChart } from '../components/TinyLineChart'
 
+// IMPORTATION SERVICE
 import {
   getUser,
   getActivity,
@@ -72,7 +81,34 @@ export function Home() {
               </div>
             </article>
 
-            {/* <article className='home--infos--right'></article> */}
+            <article className='home--infos--right'>
+              <div key={userInfos.id}>
+                <StatsCard
+                  data={userInfos.data.keyData.calorieCount + 'kCal'}
+                  icon={'fire'}
+                  img={fire}
+                  name='Calories'
+                />
+                <StatsCard
+                  data={userInfos.data.keyData.proteinCount + 'g'}
+                  icon={'chicken'}
+                  img={chicken}
+                  name='Glucides'
+                />
+                <StatsCard
+                  data={userInfos.data.keyData.carbohydrateCount + 'g'}
+                  icon={'apple'}
+                  img={apple}
+                  name='Glucides'
+                />
+                <StatsCard
+                  data={userInfos.data.keyData.lipidCount + 'g'}
+                  icon={'burger'}
+                  img={burger}
+                  name='Glucides'
+                />
+              </div>
+            </article>
           </div>
         </div>
       ) : (
