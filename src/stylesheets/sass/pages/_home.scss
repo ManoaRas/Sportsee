@@ -1,9 +1,9 @@
 .home {
   width: 100%;
+  margin: 34px;
   @media screen and (min-width: $lgb) {
     margin: 68px 107px;
   }
-  margin: 34px;
   &--title {
     font-size: 48px;
     margin: 0;

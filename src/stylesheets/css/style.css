@@ -22,6 +22,7 @@ main {
 .bar-chart {
   height: 320px;
   position: relative;
+  margin-bottom: 30px;
 }
 .bar-chart__text {
   position: absolute;
@@ -83,7 +84,7 @@ main {
 
 .stats-card {
   display: flex;
-  margin: 40px 0;
+  margin: 40px 30px;
 }
 .stats-card--icon {
   font-size: 20px;
