@@ -52,6 +52,12 @@ main {
   background-color: #020203;
 }
 
+.radial-chart {
+  position: relative;
+}
+.radial-chart__desc {
+  position: absolute;
+}
 .radial-chart__score {
   font-size: 26px;
   margin-bottom: 0;

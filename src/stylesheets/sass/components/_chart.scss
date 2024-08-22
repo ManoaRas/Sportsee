@@ -32,6 +32,10 @@
 }
 
 .radial-chart {
+  position: relative;
+  &__desc {
+    position: absolute;
+  }
   &__score {
     font-size: 26px;
     margin-bottom: 0;

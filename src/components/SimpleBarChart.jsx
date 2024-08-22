@@ -44,7 +44,7 @@ export class SimpleBarChart extends PureComponent {
         <p className='bar-chart__text'>Activité quotidienne</p>
 
         <ResponsiveContainer background-color='#E60000' height='100%' width='100%'>
-          <BarChart data={items} barCategoryGap={20} barGap={10}>
+          <BarChart data={items} barCategoryGap={20} barGap={10} barSize={10}>
             <CartesianGrid strokeDasharray='2 2' horizontal={false} vertical={false} />
 
             <XAxis dataKey='day' axisLine={false} tickLine={false} />
